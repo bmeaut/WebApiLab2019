@@ -10,7 +10,7 @@ namespace WebApiLabor.DAL
 {
     public class NorthwindContext : DbContext
     {       
-
+        /*
         private ILoggerFactory GetLoggerFactory()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
@@ -22,10 +22,14 @@ namespace WebApiLabor.DAL
        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=xgef0q;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
                 .UseLoggerFactory(GetLoggerFactory())
                 .ConfigureWarnings(c => c.Throw(RelationalEventId.QueryClientEvaluationWarning));
         }
+        */
+        public NorthwindContext(DbContextOptions<NorthwindContext> options)
+            : base(options){}
+
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
