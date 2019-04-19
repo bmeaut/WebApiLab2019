@@ -58,7 +58,7 @@ namespace WebApiLabor.DAL
                          },
                          new Product
                          {
-                             Id = 5, Name = "Whiskey", UnitPrice = 960, CategoryId = 1,
+                             Id = 5, Name = "Rum", UnitPrice = 1860, CategoryId = 1,
                              ShipmentRegion = ShipmentRegion.EU | ShipmentRegion.NorthAmerica
                          }
               );

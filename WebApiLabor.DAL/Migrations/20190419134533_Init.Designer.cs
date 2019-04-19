@@ -10,7 +10,7 @@ using WebApiLabor.DAL;
 namespace WebApiLabor.DAL.Migrations
 {
     [DbContext(typeof(NorthwindContext))]
-    [Migration("20190413175603_Init")]
+    [Migration("20190419134533_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,9 +121,9 @@ namespace WebApiLabor.DAL.Migrations
                         {
                             Id = 5,
                             CategoryId = 1,
-                            Name = "Whiskey",
+                            Name = "Rum",
                             ShipmentRegion = "EU, NorthAmerica",
-                            UnitPrice = 960
+                            UnitPrice = 1860
                         });
                 });
 

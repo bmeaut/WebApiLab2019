@@ -101,7 +101,7 @@ namespace WebApiLabor.DAL.Migrations
                     { 2, 1, "Bor", "0", 550 },
                     { 3, 1, "Tej", "0", 260 },
                     { 4, 1, "Whiskey", "Australia", 960 },
-                    { 5, 1, "Whiskey", "EU, NorthAmerica", 960 }
+                    { 5, 1, "Rum", "EU, NorthAmerica", 1860 }
                 });
 
             migrationBuilder.InsertData(

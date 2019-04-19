@@ -119,9 +119,9 @@ namespace WebApiLabor.DAL.Migrations
                         {
                             Id = 5,
                             CategoryId = 1,
-                            Name = "Whiskey",
+                            Name = "Rum",
                             ShipmentRegion = "EU, NorthAmerica",
-                            UnitPrice = 960
+                            UnitPrice = 1860
                         });
                 });
 
