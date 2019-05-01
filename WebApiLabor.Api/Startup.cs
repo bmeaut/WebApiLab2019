@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using AutoMapper;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -35,19 +33,7 @@ namespace WebApiLabor.Api
                 o.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
                 .ConfigureWarnings(c => c.Throw(RelationalEventId.QueryClientEvaluationWarning)));
 
-            services.AddTransient<IProductService, ProductService>();
-
-            services.AddAutoMapper(cfg =>
-            {
-                cfg.CreateMap<Entities.Product, Dtos.Product>()
-                    .ForMember(dto => dto.Orders, opt => opt.Ignore())
-                    .AfterMap((p, dto, ctx) =>
-                        dto.Orders = p.ProductOrders.Select(po =>
-                        ctx.Mapper.Map<Dtos.Order>(po.Order)).ToList()).ReverseMap();                    
-                cfg.CreateMap<Entities.Order, Dtos.Order>().ReverseMap();                    
-                cfg.CreateMap<Entities.Category, Dtos.Category>().ReverseMap();
-            }
-            );
+            services.AddTransient<IProductService, ProductService>();           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
