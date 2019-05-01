@@ -50,29 +50,13 @@ namespace WebApiLabor.Bll.Services
             updatedProduct.Id = productId;
             var entry = _context.Attach(updatedProduct);
             entry.State = EntityState.Modified;
-
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new EntityNotFoundException("Nem található a termék");
-            }
+            _context.SaveChanges();           
         }
 
         public void DeleteProduct(int productId)
         {
             _context.Products.Remove(new Product { Id = productId });
-
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new EntityNotFoundException("Nem található a termék");
-            }
+            _context.SaveChanges();            
         }
     }
 }
