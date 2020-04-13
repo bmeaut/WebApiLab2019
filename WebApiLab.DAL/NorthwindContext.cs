@@ -14,6 +14,9 @@ namespace WebApiLab.DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
 
+        public NorthwindContext(DbContextOptions<NorthwindContext> options)
+            : base(options) { }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
