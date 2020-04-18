@@ -24,9 +24,9 @@ namespace WebApiLab.API.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public async Task<ActionResult<IEnumerable<Product>>> GetAsync()
         {
-            return _mapper.Map<List<Product>>(_productService.GetProducts());
+            return _mapper.Map<List<Product>>(await _productService.GetProductsAsync());
         }
 
         #region Get without global exception handling
@@ -52,17 +52,17 @@ namespace WebApiLab.API.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult<Product> Get(int id)
+        public async Task<ActionResult<Product>> Get(int id)
         {
-            return _mapper.Map<Product>(_productService.GetProduct(id));            
+            return _mapper.Map<Product>(_productService.GetProductAsync(id));            
         }
 
         // POST: api/Products
         [HttpPost]
-        public ActionResult<Product> Post([FromBody] Product product)
+        public async Task<ActionResult<Product>> Post([FromBody] Product product)
         {
-            var created = _productService
-                .InsertProduct(_mapper.Map<Entities.Product>(product));
+            var created = await _productService
+                .InsertProductAsync(_mapper.Map<Entities.Product>(product));
             return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
@@ -74,17 +74,15 @@ namespace WebApiLab.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Product product)
         {
-            //_productService.
-            //    UpdateProductAsync(id, _mapper.Map<Entities.Product>(product));
             await _productService.UpdateProductAsync(id, _mapper.Map<Entities.Product>(product));
             return NoContent();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _productService.DeleteProduct(id);
+            await _productService.DeleteProductAsync(id);
             return NoContent();
         }
     }

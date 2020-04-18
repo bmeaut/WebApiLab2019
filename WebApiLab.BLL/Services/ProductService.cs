@@ -18,46 +18,47 @@ namespace WebApiLab.BLL
             _context = context;
         }
 
-        public void DeleteProduct(int productId)
+        public async Task DeleteProductAsync(int productId)
         {
             _context.Products.Remove(new Product { Id = productId });          
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (_context.Products.Find(productId) == null)
+                if ((await _context.Products
+                    .SingleOrDefaultAsync(p=>p.Id == productId)) == null)
                     throw new EntityNotFoundException("Nem található a termék");
                 else throw;
             }
         }
 
-        public Product GetProduct(int productId)
+        public async Task<Product> GetProductAsync(int productId)
         {
-            return _context.Products
+            return (await _context.Products
                .Include(p => p.Category)
                .Include(p => p.ProductOrders)
                    .ThenInclude(po => po.Order)
-               .SingleOrDefault(p => p.Id == productId) 
+               .SingleOrDefaultAsync(p => p.Id == productId))
                ?? throw new EntityNotFoundException("Nem található a termék");
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            var products = _context.Products
+            var products = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.ProductOrders)
                     .ThenInclude(po => po.Order)
-                .ToList();
+                .ToListAsync();
 
             return products;
         }
 
-        public Product InsertProduct(Product newProduct)
+        public async Task<Product> InsertProductAsync(Product newProduct)
         {
             _context.Products.Add(newProduct);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return newProduct;
         }
 
