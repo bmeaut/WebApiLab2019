@@ -54,7 +54,7 @@ namespace WebApiLab.API.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<Product>> Get(int id)
         {
-            return _mapper.Map<Product>(_productService.GetProductAsync(id));            
+            return _mapper.Map<Product>(await _productService.GetProductAsync(id));            
         }
 
         // POST: api/Products
