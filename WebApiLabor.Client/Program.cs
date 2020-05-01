@@ -30,7 +30,8 @@ namespace WebApiLabor.Client
                 {
                     var jsonStream = await response.Content.ReadAsStreamAsync();
                     var json = await JsonDocument.ParseAsync(jsonStream);
-                    Console.WriteLine($"{json.RootElement.GetProperty("name")}:{json.RootElement.GetProperty("unitPrice")}.-");
+                    Console.WriteLine($"{json.RootElement.GetProperty("name")}:" +
+                        $"{json.RootElement.GetProperty("unitPrice")}.-");
                 }
             }
         }
