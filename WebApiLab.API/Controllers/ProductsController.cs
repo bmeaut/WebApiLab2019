@@ -50,15 +50,26 @@ namespace WebApiLab.API.Controllers
         //}
         #endregion
 
-        // GET: api/Products/5
+        /// <summary>
+        /// Get a specific product with the given identifier
+        /// </summary>
+        /// <param name="id">Product's identifier</param>
+        /// <returns>Returns a specific product with the given identifier</returns>
+        /// <response code="200">Listing successful</response>
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<Product>> Get(int id)
         {
             return _mapper.Map<Product>(await _productService.GetProductAsync(id));            
         }
 
-        // POST: api/Products
+        /// <summary>
+        /// Creates a new product
+        /// </summary>
+        /// <param name="product">The product to create</param>
+        /// <returns>Returns the product inserted</returns>
+        /// <response code="201">Insert successful</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Product>> Post([FromBody] Product product)
         {
             var created = await _productService
@@ -72,6 +83,7 @@ namespace WebApiLab.API.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Put(int id, [FromBody] Product product)
         {
             await _productService.UpdateProductAsync(id, _mapper.Map<Entities.Product>(product));
@@ -80,6 +92,7 @@ namespace WebApiLab.API.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(int id)
         {
             await _productService.DeleteProductAsync(id);

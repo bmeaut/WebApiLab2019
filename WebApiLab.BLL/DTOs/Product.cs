@@ -18,5 +18,8 @@ namespace WebApiLab.API.DTO
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Order> Orders { get; set; }
+
+        [Required(ErrorMessage = "RowVersion is required")]
+        public byte[] RowVersion { get; set; }
     }
 }

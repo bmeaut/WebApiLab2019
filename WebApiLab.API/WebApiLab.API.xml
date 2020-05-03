@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApiLab.API</name>
+    </assembly>
+    <members>
+        <member name="M:WebApiLab.API.Controllers.ProductsController.Get(System.Int32)">
+            <summary>
+            Get a specific product with the given identifier
+            </summary>
+            <param name="id">Product's identifier</param>
+            <returns>Returns a specific product with the given identifier</returns>
+            <response code="200">Listing successful</response>
+        </member>
+        <member name="M:WebApiLab.API.Controllers.ProductsController.Post(WebApiLab.API.DTO.Product)">
+            <summary>
+            Creates a new product
+            </summary>
+            <param name="product">The product to create</param>
+            <returns>Returns the product inserted</returns>
+            <response code="201">Insert successful</response>
+        </member>
+    </members>
+</doc>
