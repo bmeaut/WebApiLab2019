@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebApiLab.BLL.DTO;
 using WebApiLab.DAL;
 
@@ -20,12 +21,12 @@ namespace WebApiLab.BLL
             _mapper = mapper;
         }
 
-        public void DeleteProduct(int productId)
+        public async Task DeleteProductAsync(int productId)
         {
             _context.Products.Remove(new DAL.Entities.Product { Id = productId });
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -35,35 +36,28 @@ namespace WebApiLab.BLL
             }
         }
 
-        public Product GetProduct(int productId)
+        public async Task<Product> GetProductAsync(int productId)
         {
-           return _mapper.ProjectTo<Product>(_context.Products.Where(p=>p.Id==productId))
-               .SingleOrDefault() ?? throw new EntityNotFoundException("Nem található a termék"); 
+           return await _mapper.ProjectTo<Product>(_context.Products.Where(p=>p.Id==productId))
+               .SingleOrDefaultAsync() ?? throw new EntityNotFoundException("Nem található a termék"); 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            // var xx = _context.Products
-            //.Include(p => p.Category)
-            //.Include(p => p.ProductOrders)
-            //    .ThenInclude(po => po.Order).ToArray();
-            // var products = _mapper.Map<IEnumerable<Product>>(xx);
-            var products =
+            return await
                 _mapper.ProjectTo<Product>(_context.Products)
-                .AsEnumerable();
-
-            return products;
+                .ToListAsync();
         }
 
-        public Product InsertProduct(Product newProduct)
+        public async Task<Product> InsertProductAsync(Product newProduct)
         {
             var efProduct = _mapper.Map<DAL.Entities.Product>(newProduct);
             _context.Products.Add(efProduct);
-            _context.SaveChanges();
-            return GetProduct(efProduct.Id);
+            await _context.SaveChangesAsync();
+            return await GetProductAsync(efProduct.Id);
         }
 
-        public void UpdateProduct(int productId, Product updatedProduct)
+        public async Task UpdateProductAsync(int productId, Product updatedProduct)
         {
             var efProduct = _mapper.Map<DAL.Entities.Product>(updatedProduct);
             efProduct.Id = productId;
@@ -71,15 +65,15 @@ namespace WebApiLab.BLL
             entry.State = EntityState.Modified;
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (_context.Products.SingleOrDefault(p => p.Id == productId) == null)
+                if (await _context.Products
+                        .SingleOrDefaultAsync(p => p.Id == productId) == null)
                     throw new EntityNotFoundException("Nem található a termék");
                 else throw;
             }
         }
-        /*Többi függvény generált implementációja*/
     }
 }

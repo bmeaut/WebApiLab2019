@@ -22,44 +22,39 @@ namespace WebApiLab.API.Controllers
             _productService = productService;
         }
 
-        // GET: api/<ProductsController>
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
-            return _productService.GetProducts().ToList();
+            return (await _productService.GetProductsAsync()).ToList();
         }
 
-        // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public ActionResult<Product> Get(int id)
+        public async Task<ActionResult<Product>> Get(int id)
         {
-            return _productService.GetProduct(id);
+            return await _productService.GetProductAsync(id);
         }
 
-        // POST api/<ProductsController>
         [HttpPost]
-        public ActionResult<Product> Post([FromBody] Product product)
+        public async Task<ActionResult<Product>> Post([FromBody] Product product)
         {
-            var created = _productService.InsertProduct(product);
+            var created = await _productService.InsertProductAsync(product);
             return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
                         created);
         }
 
-        // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Product product)
+        public async Task<IActionResult> Put(int id, [FromBody] Product product)
         {
-            _productService.UpdateProduct(id, product);
+            await _productService.UpdateProductAsync(id, product);
             return NoContent();
         }
 
-        // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _productService.DeleteProduct(id);
+            await _productService.DeleteProductAsync(id);
             return NoContent();
         }
     }
