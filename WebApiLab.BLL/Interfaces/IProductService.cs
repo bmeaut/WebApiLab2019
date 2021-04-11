@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using WebApiLab.DAL.Entities;
+using WebApiLab.BLL;
+using WebApiLab.BLL.DTO;
 
 namespace WebApiLab.BLL
 {

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiLab.DAL", "WebApiLab.DAL\WebApiLab.DAL.csproj", "{AA817749-03BD-47DF-A847-84856B4B2B82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiLab.DAL", "WebApiLab.DAL\WebApiLab.DAL.csproj", "{AA817749-03BD-47DF-A847-84856B4B2B82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiLab.BLL", "WebApiLab.BLL\WebApiLab.BLL.csproj", "{8F376D98-9FF5-4241-8FCF-2F2B50CBFB66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiLab.BLL", "WebApiLab.BLL\WebApiLab.BLL.csproj", "{8F376D98-9FF5-4241-8FCF-2F2B50CBFB66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiLab.API", "WebApiLab.API\WebApiLab.API.csproj", "{746531F0-87C9-482F-BEF0-E79BA45283D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8F376D98-9FF5-4241-8FCF-2F2B50CBFB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F376D98-9FF5-4241-8FCF-2F2B50CBFB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F376D98-9FF5-4241-8FCF-2F2B50CBFB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{746531F0-87C9-482F-BEF0-E79BA45283D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{746531F0-87C9-482F-BEF0-E79BA45283D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{746531F0-87C9-482F-BEF0-E79BA45283D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{746531F0-87C9-482F-BEF0-E79BA45283D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

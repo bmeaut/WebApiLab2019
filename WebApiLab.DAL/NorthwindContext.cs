@@ -12,11 +12,14 @@ namespace WebApiLab.DAL
 {
     public class NorthwindContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=xgef0q")
-                .LogTo(Console.WriteLine, LogLevel.Debug);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"connectionstring")
+        //        .LogTo(Console.WriteLine, LogLevel.Debug);
+        //}
+
+        public NorthwindContext(DbContextOptions<NorthwindContext> options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
