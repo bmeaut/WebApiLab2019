@@ -38,8 +38,11 @@ namespace WebApiLab.BLL
 
         public async Task<Product> GetProductAsync(int productId)
         {
-           return await _mapper.ProjectTo<Product>(_context.Products.Where(p=>p.Id==productId))
-               .SingleOrDefaultAsync() ?? throw new EntityNotFoundException("Nem található a termék"); 
+           return await _mapper.ProjectTo<Product>(
+                    _context.Products.Where(p=>p.Id==productId)
+                )
+               .SingleOrDefaultAsync() ?? 
+               throw new EntityNotFoundException("Nem található a termék"); 
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()
