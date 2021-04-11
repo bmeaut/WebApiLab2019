@@ -23,7 +23,16 @@ namespace WebApiLab.BLL
         public void DeleteProduct(int productId)
         {
             _context.Products.Remove(new DAL.Entities.Product { Id = productId });
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (_context.Products.SingleOrDefault(p => p.Id == productId) == null)
+                    throw new EntityNotFoundException("Nem található a termék");
+                else throw;
+            }
         }
 
         public Product GetProduct(int productId)
@@ -60,7 +69,16 @@ namespace WebApiLab.BLL
             efProduct.Id = productId;
             var entry = _context.Attach(efProduct);
             entry.State = EntityState.Modified;
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (_context.Products.SingleOrDefault(p => p.Id == productId) == null)
+                    throw new EntityNotFoundException("Nem található a termék");
+                else throw;
+            }
         }
         /*Többi függvény generált implementációja*/
     }

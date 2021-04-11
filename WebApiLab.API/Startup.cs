@@ -1,6 +1,8 @@
 using AutoMapper;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,17 +37,29 @@ namespace WebApiLab.API
             services.AddControllers()
                 /*.AddJsonOptions(o=> { o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; })*/;
             services.AddTransient<IProductService, ProductService>();
-            services.AddAutoMapper(typeof(WebApiProfile));           
+            services.AddAutoMapper(typeof(WebApiProfile));
+            services.AddProblemDetails(options =>
+            {
+                options.IncludeExceptionDetails = (ctx, ex) => false;
+                options.Map<EntityNotFoundException>(
+                    (ctx, ex) =>
+                    {
+                        var pd = StatusCodeProblemDetails.Create(StatusCodes.Status404NotFound);
+                        pd.Title = ex.Message;
+                        return pd;
+                    }
+                );
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            app.UseProblemDetails();
             app.UseRouting();
 
             app.UseAuthorization();
