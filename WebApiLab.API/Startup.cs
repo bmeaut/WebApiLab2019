@@ -35,7 +35,12 @@ namespace WebApiLab.API
             services.AddDbContext<NorthwindContext>(o =>
                     o.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddControllers()
-                /*.AddJsonOptions(o=> { o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; })*/;
+                .AddJsonOptions(opts =>
+                {
+                    opts.JsonSerializerOptions.
+                       Converters.Add(new JsonStringEnumConverter());
+                });
+            /*.AddJsonOptions(o=> { o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; })*/
             services.AddTransient<IProductService, ProductService>();
             services.AddAutoMapper(typeof(WebApiProfile));
             services.AddProblemDetails(options =>

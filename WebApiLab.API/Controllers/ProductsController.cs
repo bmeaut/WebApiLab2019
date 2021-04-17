@@ -41,6 +41,7 @@ namespace WebApiLab.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Product>> Post([FromBody] Product product)
         {
             var created = await _productService.InsertProductAsync(product);
@@ -51,6 +52,7 @@ namespace WebApiLab.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Put(int id, [FromBody] Product product)
         {
             await _productService.UpdateProductAsync(id, product);
@@ -58,6 +60,7 @@ namespace WebApiLab.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(int id)
         {
             await _productService.DeleteProductAsync(id);
