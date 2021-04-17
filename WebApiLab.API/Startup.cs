@@ -50,6 +50,7 @@ namespace WebApiLab.API
                     }
                 );
             });
+            services.AddOpenApiDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +64,9 @@ namespace WebApiLab.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseOpenApi(); // ez az MW szolgálja ki az OpenAPI JSON-t
+            app.UseSwaggerUi3(); //ez az MW adja az OpenAPI felületet
 
             app.UseEndpoints(endpoints =>
             {

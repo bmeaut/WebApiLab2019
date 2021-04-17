@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>f7d5fd9e-56b2-4b8c-b60f-c9d9b44cd0e6</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Source\WebApiLabor\WebApiLab.API\WebApiLab.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +23,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.10.9" />
   </ItemGroup>
 
   <ItemGroup>

@@ -28,6 +28,12 @@ namespace WebApiLab.API.Controllers
             return (await _productService.GetProductsAsync()).ToList();
         }
 
+        /// <summary>
+        /// Get a specific product with the given identifier
+        /// </summary>
+        /// <param name="id">Product's identifier</param>
+        /// <returns>Returns a specific product with the given identifier</returns>
+        /// <response code="200">Listing successful</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> Get(int id)
         {
