@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using WebApiLab.Client.Api;
 
 namespace WebApiLab.Client
 {
@@ -14,7 +15,9 @@ namespace WebApiLab.Client
         {
             Console.Write("ProductId: ");
             var id = Console.ReadLine();
-            await GetProductAsync(int.Parse(id));
+            //await GetProductAsync(int.Parse(id));
+            var p = await GetProduct2Async(int.Parse(id));
+            Console.WriteLine($"{p.Name} {p.UnitPrice}.-");
 
             Console.ReadKey();
         }
@@ -33,6 +36,15 @@ namespace WebApiLab.Client
                     Console.WriteLine($"{json.RootElement.GetProperty("name")}:" +
                         $"{json.RootElement.GetProperty("unitPrice")}.-");
                 }
+            }
+        }
+
+        public static async Task<Product> GetProduct2Async(int id)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                ProductsClient client = new ProductsClient(httpClient);
+                return await client.GetAsync(id);
             }
         }
     }
