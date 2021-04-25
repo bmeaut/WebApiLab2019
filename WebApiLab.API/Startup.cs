@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using WebApiLab.API.ProblemDetails;
 using WebApiLab.BLL;
 using WebApiLab.BLL.DTO;
 using WebApiLab.DAL;
@@ -54,6 +55,8 @@ namespace WebApiLab.API
                         return pd;
                     }
                 );
+                options.Map<DbUpdateConcurrencyException>(
+                            ex => new ConcurrencyProblemDetails(ex));
             });
             services.AddOpenApiDocument();
         }

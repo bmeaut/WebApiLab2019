@@ -88,6 +88,10 @@ namespace WebApiLab.DAL
                 .Entity<Product>()
                 .Property(e => e.ShipmentRegion)
                 .HasConversion(converter);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.RowVersion)
+                .IsRowVersion();
         }
 
 
